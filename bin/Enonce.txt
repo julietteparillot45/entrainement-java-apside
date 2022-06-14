@@ -1,0 +1,127 @@
+===============
+DM Covoiturage
+===============
+   
+Sur le parking du théatre, rien ne va plus. Pour améliorer la situation, Apside a décidé de vous faire travailler sur *le covoiturage*.
+
+Le problème dans toute sa généralité (transporter des gens de manière à remplir le parking au minimum) est assez compliqué. Pour commencer, on va faire
+*pas mal de simplifications* :
+
+* on suppose que les voitures ne sont pas nominatives (i.e. si Albert détient une voiture et habite à Sandillon, on dira qu'il y a une voiture disponible à Sandillon) ;
+
+* tout le monde commence à 8h00 et termine à 18h00 (pour ne pas avoir à gérer des différences d'emploi du temps).
+
+Dans la suite, on vous demande d'implémenter des classes en vous donnant
+attributs et méthodes.
+
+*D'autres méthodes seront probablement nécessaires (pour segmenter le code, ou encore avoir des méthodes d'affichage pour le debuggage, etc.); n'hésitez pas à les rajouter !*
+   
+Par ailleurs, vous devez faire vos propres tests avec une classe Executable.
+
+
+Définir les classes et implémenter les premières méthodes
+----------------------------------------------------------
+
+1. Écrivez une classe ``Voiture`` correspondant au diagramme suivant :
+
+   class Voiture {
+	   - id: int
+	   - ville: String
+	   - capacite: int
+	   + Voiture(id: int, ville: String, capacite: int)
+	   + getcapacite(): int
+	   + getVille(): String
+	   + getId(): int
+   }
+
+*Quelques précisions* : 
+
+   * l'attribut *id* correspond à un identifiant unique (entier) ;
+   * l'attribut *ville* correspond à la ville de résidence de la voiture ;
+   * l'attribut *capacite* correspond au nombre de personnes que la voiture peut transporter tout en assurant une certaine sécurité.
+
+2. Compilez votre code puis relancez les tests. Vous devez maintenant avoir un nombre de tests réussis égal à 1.
+
+3. De la même façon créez une classe ``Personne`` :
+
+    class Personne {
+		- id: int
+		- nom: String
+		- ville: String
+		- permis: boolean
+		+ Personne(id: int, nom: String, ville: String, permis: boolean)
+		+ getNom(): String
+		+ getVille(): String
+		+ getId(): int
+		+ peutConduire(): boolean
+    }
+
+*Quelques précisions* : 
+
+   * l'attribut *id* correspond à un identifiant unique (entier) ;
+   * l'attribut *nom* correspond au  nom de la personne ;
+   * l'attribut *permis* vaut vrai si la personne a le permis et faux sinon ;
+   * l'attribut *ville* correspond à la ville de résidence de la voiture ;
+   * la méthode ``peutConduire`` renvoie le booléen vrai si la personne a le droit de conduire et faux sinon (i.e. si la personne a le permis),
+
+Après compilation de votre code, le nombre de tests réussis doit maintenant être égal à 2.
+
+
+4. Créez une classe ``Covoiturage`` :
+
+    class Covoiturage {
+		- personnes: ArrayList<Personne>
+		- voitures: ArrayList<Voiture>
+		+ Covoiturage(voitures:ArrayList<Voiture>,  personnes:ArrayList<Personne>)
+		+ villeDesservie(ville:String): boolean
+		+ nbPersonnes(ville:String): int
+    }
+
+*Quelques précisions* : cette classe possède :
+
+   * deux attibuts (une *ArrayList* de personnes et une *ArrayList* de voitures),
+   * un constructeur prenant en paramètre une *ArrayList* de voitures et une *ArrayList* de personnes,
+   * une méthode ``villeDesservie`` prenant en paramètre une chaîne et renvoyant vrai si une des voitures appartient à cette ville.
+   * une méthode ``nbPersonnes`` prenant en paramètre une ville (*String*) et renvoyant le nombre de personnes habitant la ville.
+
+Après compilation de votre code, le nombre de tests réussis doit maintenant être égal à 5.
+
+Covoiturage - premiers algorithmes
+-----------------------------------
+
+Ajoutez à la classe ``Covoiturage`` :
+
+1. une méthode ``capaciteSuffisante`` prenant en paramètre une ville et renvoyant vrai si il y a assez de place dans les voitures de cette ville pour toutes les personnes qui y habitent et faux sinon ;
+
+2. une méthode ``villeEstDans`` prenant en paramètre une ArrayList de villes (String) et une ville et renvoyant vrai si la ville appartient à la liste et faux sinon (on est ici en train de reproduire le *in* de python, ce sera utile pour la suite).
+
+
+Covoiturage - suite
+-------------------
+
+Ajoutez à la classe ``Covoiturage`` :
+
+1. une méthode ``getVilles`` renvoyant *l'ensemble* des villes représentées (l'ensemble de toutes les villes de résidence des personnes et des voitures);
+
+   Le profil de la méthode est le suivant : ``public HashSet<String> getVilles()``.
+   
+   La classe ``HashSet`` implémente un *ensemble* en JAVA et il est fortement conseillé d'aller voir la documentation pour l'utiliser.
+
+2. une méthode ``capaciteSuffisante``, sans paramètre, renvoyant vrai si il y a suffisamment de places dans les voitures dans chaque ville pour que tout le monde puisse faire ses trajets (pensez à utiliser les méthodes déjà définies)
+
+3. (Challenge!) une méthode ``estPossible`` renvoyant vrai si non seulement la capacité est suffisante mais si en plus il y a assez de personnes en capacité de conduire (*Attention : pensez à prendre en priorité les voitures de grande capacité de façon à minimiser le nombre de chauffeurs*),
+
+4. (Challenge!) une méthode ``attribution`` qui renvoie une liste de nombres entiers : à la position **i** de la liste se trouve le numéro de la voiture qui conduira la personne d'identifiant **i**.
+
+
+Recherche
+---------
+
+Pour savoir dans quelle voiture une personne ira, il lui faut connaître son identifiant.
+
+1. Ajoutez une méthode ``getIdentifiant(String nomPersonne)`` qui renvoie l'identifiant de la personne nomPersonne. Si une telle personne n'existe pas, cette méthode renvoie -1.
+   Si plus d'une personne porte ce nom, la méthode renvoie l'un des identifiants existant pour ce nom.
+
+2. (Challenge!) Si la liste des personnes était triée par ordre croissant de nom (par ordre alphabétique), la recherche pourrait être rendue plus efficace. Ajoutez une méthode ``triePersonnes`` qui trie la liste des personnes par ordre de nom croissant.
+
+3. (Challenge!) Ajoutez une méthode ``getIdentifiantDichotomique(String nomPersonne)`` qui a le même comportement que ``getIdentifiant``, mais en utilisant une recherche dichotomique (donc bien plus efficace).
