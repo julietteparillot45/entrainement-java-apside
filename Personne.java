@@ -9,17 +9,20 @@ class Personne{
 		this.ville=ville;
 		this.nom=nom;
 		this.id=id;
-	this.permis=permis;
+	    this.permis=permis;
 	}	
 
     public int getId(){
-        return 3;
+        return this.id;
     }
 
     public String getVille(){
-        return "java";
+        return this.ville;
     }
     public String getNom(){
-    return "John";
+    return this.nom;
+    }
+    public boolean getPermis(){
+        return this.permis;
     }
 }
