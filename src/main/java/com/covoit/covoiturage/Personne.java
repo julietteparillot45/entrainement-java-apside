@@ -15,15 +15,21 @@ public class Personne {
 	}
 
 	public int getId() {
-		return 3;
+		return this.id;
 	}
 
 	public String getVille() {
-		return "java";
+		return this.ville;
 	}
 
 	public String getNom() {
-		return "John";
+		return this.nom;
 	}
+
+	public boolean isPermis() {
+		return this.permis;
+	}
+
+
 
 }

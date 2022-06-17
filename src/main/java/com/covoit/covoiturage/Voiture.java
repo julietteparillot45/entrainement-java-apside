@@ -13,14 +13,14 @@ public class Voiture {
 	}
 
 	public int getId() {
-		return 3;
+		return this.id;
 	}
 
 	public String getVille() {
-		return "toto";
+		return this.ville;
 	}
 
 	public int getCapacite() {
-		return 3;
+		return this.capa;
 	}
 }

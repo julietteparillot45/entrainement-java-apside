@@ -107,7 +107,7 @@ public class BatterieTestsDevoirMaison {
 	}
 
 	@Test
-	public void testGetVilles() throws Exception {
+	public void testGetVilles2() throws Exception {
 		Personne p1 = new Personne(1, "John", "Sandillon", true);
 		Personne p2 = new Personne(2, "Jules", "Orleans", true);
 		Personne p3 = new Personne(3, "Jules", "Jouy-le-potier", true);
@@ -118,7 +118,7 @@ public class BatterieTestsDevoirMaison {
 		Covoiturage c1 = new Covoiturage(new ArrayList<>(Arrays.asList(new Voiture[] { v1, v2, v3 })),
 				new ArrayList<>(Arrays.asList(new Personne[] { p1, p2, p3, p4 })));
 		HashSet<String> s1 = new HashSet<String>();
-		for (String s : c1.getVilles()) {
+		for (String s : c1.getVilles2()) {
 			s1.add(s);
 		}
 		HashSet<String> s2 = new HashSet<String>();
@@ -130,7 +130,7 @@ public class BatterieTestsDevoirMaison {
 		Covoiturage c2 = new Covoiturage(new ArrayList<>(Arrays.asList(new Voiture[] { v1 })),
 				new ArrayList<>(Arrays.asList(new Personne[] { p1 })));
 		HashSet<String> s3 = new HashSet<String>();
-		for (String s : c2.getVilles()) {
+		for (String s : c2.getVilles2()) {
 			s3.add(s);
 		}
 		HashSet<String> s4 = new HashSet<String>();
